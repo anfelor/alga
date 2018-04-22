@@ -132,6 +132,8 @@ class Graph g => GraphAPI g where
     dfs               = notImplemented
     topSort           :: g -> Maybe [Vertex g]
     topSort           = notImplemented
+    postOrder         :: g -> [Vertex g]
+    postOrder         = notImplemented
     isTopSort         :: [Vertex g] -> g -> Bool
     isTopSort         = notImplemented
 
@@ -177,6 +179,7 @@ instance Ord a => GraphAPI (AdjacencyMap.AdjacencyMap a) where
     dfsForestFrom     = AdjacencyMap.dfsForestFrom
     dfs               = AdjacencyMap.dfs
     topSort           = AdjacencyMap.topSort
+    postOrder         = AdjacencyMap.postOrder
     isTopSort         = AdjacencyMap.isTopSort
 
 instance Ord a => GraphAPI (Fold.Fold a) where

@@ -15,7 +15,7 @@ module Algebra.Graph.Test.Generic (
     testBasicPrimitives, testToGraph, testIsSubgraphOf, testSize, testProperties,
     testAdjacencyList, testPreSet, testPostSet, testPostIntSet, testGraphFamilies,
     testTransformations, testDfsForest, testDfsForestFrom, testDfs, testTopSort,
-    testIsTopSort, testSplitVertex, testBind, testSimplify
+    testPostOrder, testIsTopSort, testSplitVertex, testBind, testSimplify
   ) where
 
 import Prelude ()
@@ -994,6 +994,15 @@ testTopSort (Testsuite prefix (%)) = do
 
     test "fmap (flip isTopSort x) (topSort x) /= Just False" $ \x ->
           fmap (flip isTopSort x) (topSort % x) /= Just False
+
+testPostOrder :: Testsuite -> IO ()
+testPostOrder (Testsuite prefix (%)) = do
+    putStrLn $ "\n============ " ++ prefix ++ "postOrder ============"
+    test "postOrder (1 * 2 + 3 * 1)             == [2,1,3]" $
+          postOrder % (1 * 2 + 3 * 1)           == [2,1,3]
+
+    test "postOrder (1 * 2 + 2 * 1)             == [2,1]" $
+          postOrder % (1 * 2 + 2 * 1)           == [2,1]
 
 testIsTopSort :: Testsuite -> IO ()
 testIsTopSort (Testsuite prefix (%)) = do

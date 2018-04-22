@@ -49,6 +49,7 @@ testAdjacencyMap = do
     testDfsForestFrom     t
     testDfs               t
     testTopSort           t
+    testPostOrder         t
     testIsTopSort         t
 
     putStrLn "\n============ AdjacencyMap.scc ============"

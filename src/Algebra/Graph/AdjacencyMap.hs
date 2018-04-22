@@ -38,7 +38,7 @@ module Algebra.Graph.AdjacencyMap (
     removeVertex, removeEdge, replaceVertex, mergeVertices, transpose, gmap, induce,
 
     -- * Algorithms
-    dfsForest, dfsForestFrom, dfs, topSort, isTopSort, scc
+    dfsForest, dfsForestFrom, dfs, topSort, postOrder, isTopSort, scc
   ) where
 
 import Data.Foldable (toList)
@@ -637,6 +637,13 @@ topSort g = if isTopSort result g then Just result else Nothing
     result = reverse $ postOrder g
 
 -- | Compute the /post order/ of a graph.
+-- The difference to 'topSort' is that the list of elements is reversed
+-- and that it doesn't check whether the graph is cyclic.
+--
+-- @
+-- postOrder (1 * 2 + 3 * 1)             == [2,1,3]
+-- postOrder (1 * 2 + 2 * 1)             == [2,1]
+-- @
 postOrder :: Ord a => AdjacencyMap a -> [a]
 postOrder g = go (dfsForest g) []
   where
